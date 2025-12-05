@@ -1,0 +1,10 @@
+{%extends "base.html"%}
+{%block content%}
+    <ul>
+        {%for title in titels%}
+        <li>
+            <a href="#">{{title.titel}}</a>
+        </li>
+        {%endfor%}
+    </ul>
+{%endblock%}
