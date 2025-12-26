@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if can_view %}
+<div class="profile-container">
+
+    <!-- Фон профілю -->
+    {% if profile_user.settings.profile_background %}
+        <div class="profile-header"
+             style="background-image: url('{{ profile_user.settings.profile_background.url }}')">
+        </div>
+    {% else %}
+        <div class="profile-header"></div>
+    {% endif %}
+
+    <div class="profile-card">
+
+        <!-- Аватар -->
+        {% if profile_user.profile.avatar %}
+            <img src="{{ profile_user.profile.avatar.url }}" class="avatar">
+        {% else %}
+            <img src="{% static 'img/default-avatar.png' %}" class="avatar">
+        {% endif %}
+
+        <!-- Імʼя / нік -->
+        <h2>
+            {{ profile_user.settings.nickname|default:profile_user.username }}
+        </h2>
+
+        <!-- Email -->
+        {% if profile_user.email %}
+            <p class="email">{{ profile_user.email }}</p>
+        {% endif %}
+
+        <!-- Біо -->
+        {% if profile_user.profile.bio %}
+            <p class="bio">{{ profile_user.profile.bio }}</p>
+        {% endif %}
+
+    </div>
+
+    <!-- Групи -->
+    <div class="section">
+        <h3>Групи</h3>
+        <ul>
+            {% for group in profile_user.custom_groups.all %}
+                <li>{{ group.name }}</li>
+            {% empty %}
+                <li>Немає груп</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+{% else %}
+    <div class="private-profile">
+        <h2>Приватний профіль</h2>
+        <p>Цей профіль доступний лише друзям</p>
+    </div>
+{% endif %}
+
+{% endblock %}

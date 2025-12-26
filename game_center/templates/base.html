@@ -1,48 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Orbitron&display=swap" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <title>GAME CENTER</title>
 </head>
 <body>
-    <nav>
-        <div>
-        <a href="#"><h1>Game Center</h1></a>
-            <div>
-                <form method="get" action="/">
-                    <input type="text" name="q" placeholder="Пошук..." required>
-                    <button type="submit">Прошук теми</button>
-                </form>
-                <ul>
-                    <li>
-                        <a href="#">Пошук команди</a>
-                    </li>
-                    <li>
-                        <a href="#">Обговорення</a>
-                    </li>
-                    <li>
-                        <a href="#">Створити обговорення</a>
-                    </li>
-                    <li>
-                        <a href="#">Мої обговорення</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="#">Вхід</a>
-                    </li>
-                    <li>
-                        <a href="#">Вихід</a>
-                    </li>
-                    <li>
-                        <a href="#">Реєстрація</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="nav-list">
+        <div class="nav-container">
+
+            <a href="{% url 'home' %}" class="logo">Game Center</a>
+
+            <ul class="center-menu">
+                <li><a href="#">Пошук команди</a></li>
+                <li><a href="{% url 'titel_list' %}">Обговорення</a></li>
+                <li><a href="{% url 'titel_create' %}">Створити обговорення</a></li>
+                <li><a href="{% url 'my_titel' %}">Мої обговорення</a></li>
+            </ul>
+
+            <ul class="right-menu">
+                {% if user.is_authenticated %}
+                    <li><a class="button-clik" href="{% url 'logout' %}">Вихід</a></li>
+                {% else %}
+                    <li><a class="button-clik" href="{% url 'login' %}">Вхід</a></li>
+                    <li><a class="button-clik" href="{% url 'registretion' %}">Реєстрація</a></li>
+                {% endif %}
+            </ul>
+
         </div>
     </nav>
+
+    <form class="search-form" method="get" action="/">
+        <input class="search-input" type="text" name="q" placeholder="Пошук..." required>
+        <button class="search-button" type="submit">Прошук</button>
+    </form>
     {%block content%}
+
     {%endblock%}
+    <nav>
+        
+    </nav>
 </body>
 </html>

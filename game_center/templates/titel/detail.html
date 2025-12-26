@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ titel.titel }}</h1>
+
+{% if titel.img_background %}
+    <img src="{{ titel.img_background.url }}" width="400">
+{% endif %}
+
+<p>{{ titel.description }}</p>
+<p>Автор: {{ titel.author }}</p>
+
+{% if user == titel.author %}
+    <a href="{% url 'titel_update' titel.pk %}">Редагувати</a>
+    <a href="{% url 'titel_delete' titel.pk %}">Видалити</a>
+{% endif %}
+
+<hr>
+
+<h2>Коментарі</h2>
+
+{% for comment in titel.comment_set.all %}
+    <p>
+        <b>{{ comment.author }}:</b> {{ comment.text }}
+    </p>
+{% empty %}
+    <p>Коментарів поки немає.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<hr>
+<form method="post" action="{% url 'add_comment' titel.id %}">
+    {% csrf_token %}
+    <textarea name="text" required></textarea><br>
+    <button type="submit">Додати коментар</button>
+</form>
+{% else %}
+<p>Увійдіть, щоб залишити коментар.</p>
+{% endif %}
+
+{% endblock %}

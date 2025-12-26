@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-a$@-uyk%+8k7#4y2qtubpq0w)$-kmo*khss(=hvk_-qgr+d4$q
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Application definition
 
@@ -71,6 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'game_center.wsgi.application'
 
+LOGIN_URL = "login"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -118,6 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 AUTH_USER_MODEL = 'core.Users'
 

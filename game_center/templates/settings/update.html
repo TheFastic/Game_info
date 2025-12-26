@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="settings-container">
+
+    <h2>Налаштування профілю</h2>
+
+    <form method="post" enctype="multipart/form-data" class="settings-form">
+        {% csrf_token %}
+
+        <!-- Nickname -->
+        <div class="form-group">
+            <label for="{{ form.nickname.id_for_label }}">Нікнейм</label>
+            {{ form.nickname }}
+        </div>
+
+        <!-- Profile background -->
+        <div class="form-group">
+            <label for="{{ form.profile_background.id_for_label }}">
+                Фон профілю
+            </label>
+
+            {% if user.settings.profile_background %}
+                <div class="preview">
+                    <img src="{{ user.settings.profile_background.url }}">
+                </div>
+            {% endif %}
+
+            {{ form.profile_background }}
+        </div>
+
+        <!-- Public / Private -->
+        <div class="form-group checkbox">
+            <label>
+                {{ form.profile_public }}
+                Публічний профіль
+            </label>
+        </div>
+
+        <button type="submit" class="btn-save">
+            Зберегти
+        </button>
+    </form>
+
+</div>
+{% endblock %}

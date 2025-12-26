@@ -1,0 +1,52 @@
+{%extends "base.html"%}
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Orbitron&display=swap" rel="stylesheet">
+<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+{%block content%}
+<!-- Про сайт -->
+<div class="block-home">
+    <section class="about-section">
+        <div class="container">
+            <h2 class="logo-bocks">Про наш сайт</h2>
+            <p class="text-info">
+                Ласкаво просимо на нашу платформу!  
+                Тут ви можете знайти тімейтів, створювати проєкти та спільно обговорювати ціккаві теми.  
+                Ми зібрали інструменти, які допоможуть вам швидко знаходити людей зі спільними інтересами,
+                об’єднуватися в команди та грати любимі ігри разом.
+            </p>
+        </div>
+    </section>
+
+    <!-- Про пошук тімейтів -->
+    <section class="team-search-section">
+        <div class="container">
+            <h2 class="logo-bocks">Пошук тімейтів</h2>
+            <p class="text-info">
+                Використовуйте розширений пошук для підбору учасників на будь-який проєкт:
+            </p>
+            <ul class="text-funcshen">
+                <li>Фільтруйте людей за інтересами</li>
+                <li>Шукайте за інтересами та іграми;</li>
+                <li>Переглядайте профілі та відгуки інших користувачів.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Про обговорення -->
+    <section class="discussion-section">
+        <div class="container">
+            <h2 class="logo-bocks">Обговорення та спільнота</h2>
+            <p class="text-info">
+                У нас є зручна система обговорень, де ви можете:
+            </p>
+            <ul class="text-funcshen">
+                <li>Створювати теми для проєктів та ідей;</li>
+                <li>Спілкуватися з іншими учасниками;</li>
+                <li>Ділитися корисними матеріалами та отримувати зворотний зв’язок.</li>
+            </ul>
+        </div>
+    </section>
+</div>
+{%endblock%}

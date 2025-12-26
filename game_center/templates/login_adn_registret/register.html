@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Зареєструватися{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <h2 class="text-center mb-4">Реєстрація</h2>
+
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label for="id_username" class="form-label">Логін</label>
+                    <input type="text" name="username" class="form-control" id="id_username" required>
+                    <div class="invalid-feedback">Введіть логін.</div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="id_email" required>
+                    <div class="invalid-feedback">Введіть коректний email.</div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3 position-relative">
+                    <label for="id_password1" class="form-label">Пароль</label>
+                    <div class="input-group">
+                        <input type="password" name="password1" class="form-control" id="id_password1" required>
+                        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="id_password1">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="invalid-feedback">Введіть пароль.</div>
+                    </div>
+                </div>
+
+                <!-- Confirm password -->
+                <div class="mb-3 position-relative">
+                    <label for="id_password2" class="form-label">Повторіть пароль</label>
+                    <div class="input-group">
+                        <input type="password" name="password2" class="form-control" id="id_password2" required>
+                        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="id_password2">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="invalid-feedback">Паролі повинні співпадати.</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Зареєструватися</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle password visibility
+    const toggleButtons = document.querySelectorAll('.toggle-password');
+    
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const passwordInput = document.getElementById(targetId);
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+    });
+
+    // Confirm password validation
+    const password1 = document.getElementById('id_password1');
+    const password2 = document.getElementById('id_password2');
+    
+    function validatePassword() {
+        if (password1.value !== password2.value) {
+            password2.setCustomValidity("Паролі не співпадають");
+        } else {
+            password2.setCustomValidity("");
+        }
+    }
+    
+    password1.onchange = validatePassword;
+    password2.onkeyup = validatePassword;
+
+    // Form bootstrap validation
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+});
+</script>
+
+{% endblock %}

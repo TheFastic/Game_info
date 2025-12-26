@@ -10,6 +10,13 @@ class TitelListView(ListView):
     context_object_name = "titels"
     ordering = "-created_at"
 
+class List_View(ListView):
+    model = Titel
+    template_name = "titel/my_titel.html"
+    context_object_name = "my_titel"
+    def get_queryset(self):
+        return Titel.objects.filter(author = self.request.user) 
+
 class TitelDetailView(DetailView):
     model = Titel
     template_name = "titel/detail.html"

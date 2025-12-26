@@ -5,7 +5,7 @@ from .views import ProfileView, FriendListView, SettingUpdateView, FriendRequest
 urlpatterns = [
     path("registretion/", views.register_view,name="registretion"),
     path("login/", views.login_view, name="login"),
-    path("logout/", views.logout, name="logout"),
+    path("logout/", views.logout_user, name="logout"),
     path("profil/", ProfileView.as_view(), name="profil"),
     path("friends/", FriendListView.as_view(), name="friends"),
     path("setting/", SettingUpdateView.as_view(), name="settings"),
